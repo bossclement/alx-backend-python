@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
-"""
+'''
 Module doc
-"""
+'''
 import asyncio
 import time
-wait_n = __import__('1-concurrent_coroutines').wait_n
+async_comprehension = __import__('1-async_comprehension').async_comprehension
 
 
-def measure_time(n: int, max_delay: int) -> float:
+async def measure_runtime() -> float:
     """
-    Execute async_comprehension four times in parallel using asyncio.gather
+    Will execute async_comprehension four times in parallel using asyncio.gather
     """
     start = time.time()
-    asyncio.run(wait_n(n, max_delay))
-    end = time.time() - start
-    return end
+    await asyncio.gather(*(async_comprehension() for n in range(4)))
+    end = time.time()
+    return end - start

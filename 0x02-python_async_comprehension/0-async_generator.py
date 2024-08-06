@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
-"""
+'''
 Module doc
-"""
+'''
 import random
 import asyncio
+from typing import Generator
 
 
-async def wait_random(max_delay: int = 10) -> float:
+async def async_generator() -> Generator[float, None, None]:
     """
-    Takes an ineger and rests before it returns a random number
-    from the function
+    Will loop 10 times, each time asynchronously wait 1 second,
+    then yield a random number between 0 and 10. Use the random module.
     """
-    delay = random.uniform(0, max_delay)
-    await asyncio.sleep(delay)
-    return delay
+    for i in range(10):
+        await asyncio.sleep(1)
+        yield random.uniform(0, 10)
